@@ -19,7 +19,7 @@ plt.rcParams['font.size'] = 13
 plt.rcParams["legend.loc"] = 'best'
 
 #%% - Load data
-df = pd.read_csv("./data/insurance.csv")
+df = pd.read_csv("./Data/insurance.csv")
 
 #%% - Hiểu dữ liệu
 df.info()
@@ -209,3 +209,6 @@ print(model1.summary())
 # smoker_yes 0.3734
 # Và R-squared là 0.603
 # charges = 0.1170 + 0.3734*smoker_yes
+
+
+
