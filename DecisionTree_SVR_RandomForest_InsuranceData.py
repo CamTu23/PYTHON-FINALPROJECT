@@ -61,6 +61,10 @@ plt.show()
 
 #%%
 y_pred = tree_insurance.predict(x_test)
+#%%
+plt.figure(figsize=(10,10))
+sns.regplot(y_test, y_pred)
+plt.show()
 #%% Evaluate
 print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))
 print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
@@ -77,8 +81,11 @@ x_test_rf = sc.transform(x_test)
 rf_insurance = RandomForestRegressor(n_estimators=20, random_state=0)
 rf_insurance.fit(x_train_rf, y_train)
 #%%Predict
-y_pred = rf_insurance.predict(x_test_rf)
-
+y_pred = rf_insurance.predict(x_test_rf).reshape(-1,1)
+#%%
+plt.figure(figsize=(10,10))
+sns.regplot(y_test, y_pred)
+plt.show()
 #%% Evaluate
 print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))
 print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
