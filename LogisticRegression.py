@@ -1,6 +1,6 @@
 #%% - nạp thư viện
-import numpy as np # linear algebra
-import pandas as pd # data processing
+import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import gc
@@ -242,6 +242,39 @@ new_df.head()
 # df['y'] = df['y'].map({'yes': 1, 'no': 0})
 # df
 #%% - Mô hình đơn biến
+# Xét biến độc lập 'housing', biến phụ thuộc 'y'
+# Liệu rằng một người khi có khoản nợ mua nhà hay không có ảnh hưởng đến quyết định đăng ký tiền gửi của họ hay không?
+# lấy ra biến housing và biến y trong tập dữ liệu
+ndf = df[['housing', 'y']]
+new_ndf = pd.get_dummies(ndf, columns=['housing'], drop_first=True)
+new_ndf.head()
+# Chuyển đổi dữ liệu ( Chuyển categorical về 0 và 1)
+new_ndf['y'].replace('yes', 1, inplace=True)
+new_ndf['y'].replace('no', 0, inplace=True)
+new_ndf.head()
+#%% - Chia dữ liệu train/test ( 75% train và 25% test)
+uni_x = new_ndf.drop("y", axis='columns')
+uni_y = new_ndf["y"]
+x_train, x_test, y_train, y_test = train_test_split(uni_x, uni_y, random_state=0, train_size=.75)
+#%% - Xây dựng mô hình hồi quy Logistic đơn biến
+uni_model = LogisticRegression(solver='liblinear', C=10.0, random_state=0)
+uni_model.fit(x_train, y_train)
+y_uni_pred = uni_model.predict(x_test)
+print(confusion_matrix(y_uni_pred, y_test))
+print(uni_model.coef_, uni_model.intercept_)
+print(classification_report(y_test, y_uni_pred))
+# Ma trận nhầm lẫn
+uni_cm = confusion_matrix(y_test, y_uni_pred)
+fig, ax = plt.subplots(figsize=(7.5, 7.5))
+ax.matshow(uni_cm, cmap=plt.cm.Blues, alpha=0.7)
+for i in range(uni_cm.shape[0]):
+    for j in range(uni_cm.shape[1]):
+        ax.text(x=j, y=i, s=uni_cm[i, j], va='center', ha='center', size='xx-large')
+plt.xlabel('Predictions', fontsize=18)
+plt.ylabel('Actuals', fontsize=18)
+plt.title('Confusion Matrix', fontsize=18)
+plt.show()
+#=============================================================================
 #%% - Mô hình đa biến
 # - Chia dữ liệu train/test ( 75% train và 25% test)
 x = df.drop("y", axis='columns')
@@ -255,6 +288,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(x, y, random_state=0, train_
 lgt_model = LogisticRegression(solver='liblinear', C=10.0, random_state=0)
 lgt_model.fit(X_train, Y_train)
 y_pred = lgt_model.predict(X_test)
+print(confusion_matrix(y_pred, y_test))
 print(lgt_model.coef_, lgt_model.intercept_)
 #In các thông số
 print(confusion_matrix(Y_test, y_pred))
