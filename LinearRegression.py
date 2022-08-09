@@ -182,9 +182,9 @@ y_pred = model.predict(X_test_lm)
 #%% - Trực quan hóa dữ liệu
 plt.figure(figsize=(14,8))
 sns.regplot(x=y_test, y=y_pred, ci=68, fit_reg=True,scatter_kws={"color": "blue"}, line_kws={"color": "red"})
-plt.title('y_test vs y_pred', fontsize=20)              # Plot heading
-plt.xlabel('y_test', fontsize=18)                          # X-label
-plt.ylabel('y_pred', fontsize=16)                          # Y-label
+plt.title('Predict y_test vs y_pred', fontsize=20)              # Plot heading
+plt.xlabel('Actual', fontsize=18)                          # X-label
+plt.ylabel('Predict', fontsize=16)                          # Y-label
 plt.show()
 
 #%% - Tạo model cho mô hình đơn biến somker_yes
