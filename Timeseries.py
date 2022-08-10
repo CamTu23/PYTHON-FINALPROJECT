@@ -99,7 +99,8 @@ plt.show()
 modelARMA=ARIMA(train_data,order=(1,0,2),trend='t')
 fitted=modelARMA.fit()
 print(fitted.summary())
-# Dự báo ARMA
+
+#%% Dự báo ARMA
 predsARMA = fitted.get_forecast(len(test_data), alpha=0.05)
 fc = predsARMA.predicted_mean
 fc.index = test_data.index
@@ -125,7 +126,8 @@ plt.show()
 modelAR=ARIMA(train_data,order=(1,0,0),trend='t')
 fitted=modelAR.fit()
 print(fitted.summary())
-# Dự báo AR
+
+#%% Dự báo AR
 predsAR= fitted.get_forecast(len(test_data), alpha=0.05)
 fc = predsAR.predicted_mean
 fc.index = test_data.index
@@ -156,6 +158,7 @@ plt.show()
 model_ARIMA=ARIMA(train_data,order=(5,1,2),trend='t')
 fitted=model_ARIMA.fit()
 print(fitted.summary())
+
 #%% Dự báo ARIMA
 predsARIMA = fitted.get_forecast(len(test_data), alpha=0.05)
 fc = predsARIMA.predicted_mean
@@ -171,8 +174,29 @@ plt.plot(train_data,label="Training data")
 plt.plot(test_data,color="g",label="Actual ")
 plt.plot(fc_series,color="r",label="Predicted ")
 plt.fill_between(lower_series.index,lower_series,upper_series,color="b",alpha=.10)
-plt.title('Passengers prediction with AR')
+plt.title('Passengers prediction with ARIMA')
 plt.xlabel("Month")
 plt.ylabel("Number Of Passengers")
 plt.legend()
 plt.show()
+
+#%% Evaluate for 3 model
+def forecast_accuracy(forecast, actual):
+    mape = np.mean(np.abs(forecast - actual)/np.abs(actual))  # MAPE
+    me = np.mean(forecast - actual)             # ME
+    mae = np.mean(np.abs(forecast - actual))    # MAE
+    mpe = np.mean((forecast - actual)/actual)   # MPE
+    rmse = np.mean((forecast - actual)**2)**.5  # RMSE
+    corr = np.corrcoef(forecast, actual)[0,1]   # corr
+    mins = np.amin(np.hstack([forecast[:,None],
+                              actual[:,None]]), axis=1)
+    maxs = np.amax(np.hstack([forecast[:,None],
+                              actual[:,None]]), axis=1)
+    minmax = 1 - np.mean(mins/maxs)             # minmax
+    return({'mape':mape, 'me':me, 'mae': mae,
+            'mpe': mpe, 'rmse':rmse,
+            'corr':corr, 'minmax':minmax})
+
+forecast_accuracy(fc, test_data.values)
+print(forecast_accuracy(fc, test_data.values))
+
