@@ -18,9 +18,7 @@ from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import MinMaxScaler
 #%% - Load dữ liệu
 df = pd.read_csv('./Data/DL.csv')
-#%%
 df.head()
-#%%
 df.info
 #%%
 df.describe(include='all')
@@ -58,19 +56,8 @@ sns.countplot(x="marital", data=df, hue="y", order=df["marital"].value_counts().
 plt.title("Mối quan hệ giữa Martial và y")
 plt.show()
 #%% - Job
-=======
-#%%Education
-sns.countplot(x="education", data=df, hue="y", order=df["education"].value_counts().index)
-plt.title("Mối quan hệ giữa education và y ")
-plt.show()
-#%%Marital
-sns.countplot(x="marital", data=df, hue="y", order=df["marital"].value_counts().index)
-plt.title("Mối quan hệ giữa Martial và y")
-plt.show()
-#%%Job
 sns.countplot(x="job", data=df, hue="y", order=df["job"].value_counts().index)
 plt.title("Mối quan hệ giữa Job và y")
-plt.xticks(rotation=30)
 plt.show()
 #%% - Loan
 sns.countplot(x="loan", data=df, hue="y", order=df["loan"].value_counts().index)
@@ -85,16 +72,6 @@ sns.countplot(x="default", data=df, hue="y", order=df["default"].value_counts().
 plt.title("Mối quan hệ giữa default và y")
 plt.show()
 #%% - Contact
-=======
-#%%Loan
-sns.countplot(x="loan", data=df, hue="y", order=df["loan"].value_counts().index)
-plt.title("Mối quan hệ giữa loan và y")
-plt.show()
-#%%Housing
-sns.countplot(x="housing", data=df, hue="y", order=df["housing"].value_counts().index)
-plt.title(" Mối quan hệ gữa housing và y")
-plt.show()
-#%%Contact
 sns.countplot(x="contact", data=df, hue="y", order=df["contact"].value_counts().index)
 plt.title(" Mối quan hệ giữa Contact và y")
 plt.show()
@@ -113,17 +90,11 @@ plt.show()
 # # Tạo figure kết hợp của 2 biểu đồ box và hist với matplotlib.Axes objects (ax_box and ax_hist)
 # f, (ax_box, ax_hist) = plt.subplots(2, sharex=True, gridspec_kw={"height_ratios": (0.3, 1)})
 #%% - Age
-=======
 # Thiết lập màu nền (sử dụng sns.set_theme() nếu seaborn version 0.11.0 or above)
 sns.set(rc={'figure.figsize': (11, 8)}, font_scale=1.5, style='whitegrid')
 # Tạo figure kết hợp của 2 biểu đồ box và hist với matplotlib.Axes objects (ax_box and ax_hist)
 f, (ax_box, ax_hist) = plt.subplots(2, sharex=True, gridspec_kw={"height_ratios": (0.3, 1)})
-#%% Age
-# Thiết lập màu nền (sử dụng sns.set_theme() nếu seaborn version 0.11.0 or above)
-sns.set(rc={'figure.figsize': (11, 8)}, font_scale=1.5, style='whitegrid')
-# Tạo figure kết hợp của 2 biểu đồ box và hist với matplotlib.Axes objects (ax_box and ax_hist)
-f, (ax_box, ax_hist) = plt.subplots(2, sharex=True, gridspec_kw={"height_ratios": (0.3, 1)})
-#%% boxplot
+# boxplot
 mean = df['age'].mean()
 median = df['age'].median()
 mode = df['age'].mode().values[0]
@@ -132,7 +103,7 @@ sns.boxplot(data=df, x="age", y="y", ax=ax_box, order=df["y"].value_counts().ind
 ax_box.axvline(mean, color='r', linestyle='--')
 ax_box.axvline(median, color='g', linestyle='-')
 ax_box.axvline(mode, color='b', linestyle='-')
-#%% histogram
+# histogram
 sns.histplot(data=df, x="age", ax=ax_hist, kde=True)
 ax_hist.axvline(mean, color='r', linestyle='--', label="Mean")
 ax_hist.axvline(median, color='g', linestyle='-', label="Median")
@@ -141,22 +112,19 @@ ax_hist.legend()
 ax_box.set(xlabel='')
 plt.show()
 #%% - balance
-=======
-#%% balance
-# Thiết lập màu nền (sử dụng sns.set_theme() nếu seaborn version 0.11.0 or above)
 sns.set(rc={'figure.figsize': (11, 8)}, font_scale=1.5, style='whitegrid')
-#%% Tạo figure kết hợp của 2 biểu đồ box và hist với matplotlib.Axes objects (ax_box and ax_hist)
 f, (ax_box, ax_hist) = plt.subplots(2, sharex=True, gridspec_kw={"height_ratios": (0.3, 1)})
 
 mean = df['balance'].mean()
 median = df['balance'].median()
 mode = df['balance'].mode().values[0]
-#%%
+
 sns.boxplot(data=df, x="balance", y="y", ax=ax_box, order=df["y"].value_counts().index)
 ax_box.axvline(mean, color='r', linestyle='--')
 ax_box.axvline(median, color='g', linestyle='-')
 ax_box.axvline(mode, color='b', linestyle='-')
 sns.histplot(data=df, x="balance", ax=ax_hist, kde=True)
+
 ax_hist.axvline(mean, color='r', linestyle='--', label="Mean")
 ax_hist.axvline(median, color='g', linestyle='-', label="Median")
 ax_hist.axvline(mode, color='b', linestyle='-', label="Mode")
@@ -164,22 +132,17 @@ ax_hist.legend()
 ax_box.set(xlabel='')
 plt.show()
 #%% - day
-# Thiết lập màu nền (sử dụng sns.set_theme() nếu seaborn version 0.11.0 or above)
-=======
-#day
-#%% Thiết lập màu nền (sử dụng sns.set_theme() nếu seaborn version 0.11.0 or above)
 sns.set(rc={'figure.figsize': (11, 8)}, font_scale=1.5, style='whitegrid')
-#%% Tạo figure kết hợp của 2 biểu đồ box và hist với matplotlib.Axes objects (ax_box and ax_hist)
 f, (ax_box, ax_hist) = plt.subplots(2, sharex=True, gridspec_kw={"height_ratios": (0.3, 1)})
 mean = df['day'].mean()
 median = df['day'].median()
 mode = df['day'].mode().values[0]
-#%%
+
 sns.boxplot(data=df, x="day", y="y", ax=ax_box, order=df["y"].value_counts().index)
 ax_box.axvline(mean, color='r', linestyle='--')
 ax_box.axvline(median, color='g', linestyle='-')
 ax_box.axvline(mode, color='b', linestyle='-')
-#%%
+
 sns.histplot(data=df, x="day", ax=ax_hist, kde=True)
 ax_hist.axvline(mean, color='r', linestyle='--', label="Mean")
 ax_hist.axvline(median, color='g', linestyle='-', label="Median")
@@ -188,22 +151,17 @@ ax_hist.legend()
 ax_box.set(xlabel='')
 plt.show()
 #%% - duration
-# Thiết lập màu nền (sử dụng sns.set_theme() nếu seaborn version 0.11.0 or above)
-=======
-#duration
-#%% Thiết lập màu nền (sử dụng sns.set_theme() nếu seaborn version 0.11.0 or above)
 sns.set(rc={'figure.figsize': (11, 8)}, font_scale=1.5, style='whitegrid')
-#%% Tạo figure kết hợp của 2 biểu đồ box và hist với matplotlib.Axes objects (ax_box and ax_hist)
 f, (ax_box, ax_hist) = plt.subplots(2, sharex=True, gridspec_kw={"height_ratios": (0.3, 1)})
 mean = df['duration'].mean()
 median = df['duration'].median()
 mode = df['duration'].mode().values[0]
-#%%
+
 sns.boxplot(data=df, x="duration", y="y", ax=ax_box, order=df["y"].value_counts().index)
 ax_box.axvline(mean, color='r', linestyle='--')
 ax_box.axvline(median, color='g', linestyle='-')
 ax_box.axvline(mode, color='b', linestyle='-')
-#%%
+
 sns.histplot(data=df, x="duration", ax=ax_hist, kde=True)
 ax_hist.axvline(mean, color='r', linestyle='--', label="Mean")
 ax_hist.axvline(median, color='g', linestyle='-', label="Median")
@@ -212,22 +170,17 @@ ax_hist.legend()
 ax_box.set(xlabel='')
 plt.show()
 #%% - campaign
-# Thiết lập màu nền (sử dụng sns.set_theme() nếu seaborn version 0.11.0 or above)
-=======
-#campaign
-#%% Thiết lập màu nền (sử dụng sns.set_theme() nếu seaborn version 0.11.0 or above)
 sns.set(rc={'figure.figsize': (11, 8)}, font_scale=1.5, style='whitegrid')
-#%%Tạo figure kết hợp của 2 biểu đồ box và hist với matplotlib.Axes objects (ax_box and ax_hist)
 f, (ax_box, ax_hist) = plt.subplots(2, sharex=True, gridspec_kw={"height_ratios": (0.3, 1)})
 mean = df['campaign'].mean()
 median = df['campaign'].median()
 mode = df['campaign'].mode().values[0]
-#%%
+
 sns.boxplot(data=df, x="campaign", y="y", ax=ax_box, order=df["y"].value_counts().index)
 ax_box.axvline(mean, color='r', linestyle='--')
 ax_box.axvline(median, color='g', linestyle='-')
 ax_box.axvline(mode, color='b', linestyle='-')
-#%%
+
 sns.histplot(data=df, x="campaign", ax=ax_hist, kde=True)
 ax_hist.axvline(mean, color='r', linestyle='--', label="Mean")
 ax_hist.axvline(median, color='g', linestyle='-', label="Median")
@@ -236,22 +189,17 @@ ax_hist.legend()
 ax_box.set(xlabel='')
 plt.show()
 #%% - pdays
-# Thiết lập màu nền (sử dụng sns.set_theme() nếu seaborn version 0.11.0 or above)
-=======
-#pdays
-#%% Thiết lập màu nền (sử dụng sns.set_theme() nếu seaborn version 0.11.0 or above)
 sns.set(rc={'figure.figsize': (11, 8)}, font_scale=1.5, style='whitegrid')
-#%% Tạo figure kết hợp của 2 biểu đồ box và hist với matplotlib.Axes objects (ax_box and ax_hist)
 f, (ax_box, ax_hist) = plt.subplots(2, sharex=True, gridspec_kw={"height_ratios": (0.3, 1)})
 mean = df['pdays'].mean()
 median = df['pdays'].median()
 mode = df['pdays'].mode().values[0]
-#%%
+
 sns.boxplot(data=df, x="pdays", y="y", ax=ax_box, order=df["y"].value_counts().index)
 ax_box.axvline(mean, color='r', linestyle='--')
 ax_box.axvline(median, color='g', linestyle='-')
 ax_box.axvline(mode, color='b', linestyle='-')
-#%%
+
 sns.histplot(data=df, x="pdays", ax=ax_hist, kde=True)
 ax_hist.axvline(mean, color='r', linestyle='--', label="Mean")
 ax_hist.axvline(median, color='g', linestyle='-', label="Median")
@@ -260,22 +208,17 @@ ax_hist.legend()
 ax_box.set(xlabel='')
 plt.show()
 #%% - previous
-# Thiết lập màu nền (sử dụng sns.set_theme() nếu seaborn version 0.11.0 or above)
-=======
-#previous
-#%% Thiết lập màu nền (sử dụng sns.set_theme() nếu seaborn version 0.11.0 or above)
 sns.set(rc={'figure.figsize': (11, 8)}, font_scale=1.5, style='whitegrid')
-#%% Tạo figure kết hợp của 2 biểu đồ box và hist với matplotlib.Axes objects (ax_box and ax_hist)
 f, (ax_box, ax_hist) = plt.subplots(2, sharex=True, gridspec_kw={"height_ratios": (0.3, 1)})
 mean = df['previous'].mean()
 median = df['previous'].median()
 mode = df['previous'].mode().values[0]
-#%%
+
 sns.boxplot(data=df, x="previous", y="y", ax=ax_box, order=df["y"].value_counts().index)
 ax_box.axvline(mean, color='r', linestyle='--')
 ax_box.axvline(median, color='g', linestyle='-')
 ax_box.axvline(mode, color='b', linestyle='-')
-#%%
+
 sns.histplot(data=df, x="previous", ax=ax_hist, kde=True)
 ax_hist.axvline(mean, color='r', linestyle='--', label="Mean")
 ax_hist.axvline(median, color='g', linestyle='-', label="Median")
@@ -283,8 +226,7 @@ ax_hist.axvline(mode, color='b', linestyle='-', label="Mode")
 ax_hist.legend()
 ax_box.set(xlabel='')
 plt.show()
-#%% - Ma trận tương quan heatmap
-=======
+
 #%% Ma trận tương quan heatmap
 correlation_matrix = df.corr()
 sns.heatmap(correlation_matrix, annot=True)
@@ -320,12 +262,11 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.25, random
 # df['contact'] = df['contact'].map({'telephone': 1, 'cellular': 0})
 # df['y'] = df['y'].map({'yes': 1, 'no': 0})
 # df
-=======
-# print(new_df.corr())
-#%% - Mô hình đơn biến
+#%% print(new_df.corr())
+# - Mô hình đơn biến
 # Xét biến độc lập 'housing', biến phụ thuộc 'y'
 # Liệu rằng một người khi có khoản nợ mua nhà hay không có ảnh hưởng đến quyết định đăng ký tiền gửi của họ hay không?
-# lấy ra biến housing và biến y trong tập dữ liệu
+#%% lấy ra biến housing và biến y trong tập dữ liệu
 ndf = df[['housing', 'y']]
 new_ndf = pd.get_dummies(ndf, columns=['housing'], drop_first=True)
 new_ndf.head()
@@ -380,15 +321,12 @@ plt.show()
 # x = new_df.drop("y", axis='columns')
 # y = new_df["y"]
 # X_train, X_test, Y_train, Y_test = train_test_split(x, y, random_state=0, train_size=.75)
-=======
 x = new_df.drop("y", axis='columns')
 y = new_df["y"]
 X_train, X_test, Y_train, Y_test = train_test_split(x, y, random_state=0, train_size=.75)
 #%% - Xây dựng model
-# Sử dụng statsmodels
 lgt_model = LogisticRegression(solver='liblinear', C=10.0, random_state=0)
 lgt_model.fit(X_train, Y_train)
-=======
 y_pred = lgt_model.predict(X_test)
 #%%
 print(confusion_matrix(y_pred, y_test))
@@ -425,7 +363,6 @@ lgt_oversampling = LogisticRegression(solver='liblinear')
 lgt_oversampling.fit(X_train_ROS, y_train_ROS)
 y_pred_oversampling = lgt_oversampling.predict(X_test)
 #%%
-=======
 y_pred_proba = lgt_oversampling.predict_proba(X_test)[:, 1]
 #%%
 sns.set(rc={'figure.figsize': (6, 5)})
@@ -435,10 +372,6 @@ plt.plot(fpr, tpr, label="data 1, auc="+str(auc))
 plt.legend(loc=4)
 plt.show()
 #%% - =======SVM========
-# from sklearn.preprocessing import MinMaxScaler
-# scaling = MinMaxScaler(feature_range=(-1, 1)).fit(X_train)
-# X_train_n = scaling.transform(X_train)
-# X_test_n = scaling.transform(X_test)
 svc_model = SVC(kernel='linear', gamma='scale', shrinking=False,)
 svc_model.fit(X_train, Y_train)
 #%%
